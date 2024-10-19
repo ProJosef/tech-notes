@@ -11,7 +11,9 @@ export const fetchUsers = async () => {
 };
 
 export const fetchUserById = async (id) => {
-  const response = await fetch(`https://tech-notes-dashboard.netlify.app/api/users/${id}`, { cache: 'no-store' });
+  const response = await fetch(`https://tech-notes-dashboard.netlify.app/api/users/${id}`, {
+    cache: 'no-store',
+  });
   const data = await response.json();
 
   if (!response.ok) {

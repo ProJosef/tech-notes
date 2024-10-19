@@ -1,6 +1,8 @@
 export const fetchNotes = async () => {
-  const response = await fetch('https://tech-notes-dashboard.netlify.app/api/notes', {
-    const data = await response.json();
+  const response = await fetch('https://tech-notes-dashboard.netlify.app/api/users', {
+    cache: 'no-store',
+  });
+  const data = await response.json();
 
   if (!response.ok) {
     throw new Error(data?.error);
@@ -9,7 +11,9 @@ export const fetchNotes = async () => {
 };
 
 export const fetchNoteById = async (id) => {
-  const response = await fetch(`https://tech-notes-dashboard.netlify.app/api/notes/${id}`, { cache: 'no-store' });
+  const response = await fetch(`https://tech-notes-dashboard.netlify.app/api/notes/${id}`, {
+    cache: 'no-store',
+  });
   const data = await response.json();
 
   if (!response.ok) {
