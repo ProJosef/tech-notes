@@ -52,7 +52,7 @@ const handler = NextAuth({
     async session({ session, token }) {
       session.user.id = token.id;
       session.user.role = token.role;
-      session.permission = session.user.role === "Admin" || session.user.role === "Manager"
+      session.permission = session.user.role === 'Admin' || session.user.role === 'Manager';
       return session;
     },
   },
