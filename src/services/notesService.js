@@ -1,6 +1,6 @@
 export const fetchNotes = async () => {
-  const response = await fetch('http://localhost:3000/api/notes', { cache: 'no-store' });
-  const data = await response.json();
+  const response = await fetch('https://tech-notes-dashboard.netlify.app/api/notes', {
+    const data = await response.json();
 
   if (!response.ok) {
     throw new Error(data?.error);
@@ -9,7 +9,7 @@ export const fetchNotes = async () => {
 };
 
 export const fetchNoteById = async (id) => {
-  const response = await fetch(`http://localhost:3000/api/notes/${id}`, { cache: 'no-store' });
+  const response = await fetch(`https://tech-notes-dashboard.netlify.app/api/notes/${id}`, { cache: 'no-store' });
   const data = await response.json();
 
   if (!response.ok) {
@@ -19,7 +19,7 @@ export const fetchNoteById = async (id) => {
 };
 
 export const createNote = async (noteData) => {
-  const response = await fetch('http://localhost:3000/api/notes', {
+  const response = await fetch('/api/notes', {
     method: 'POST',
     body: JSON.stringify(noteData),
   });
@@ -45,7 +45,7 @@ export const updateNote = async (id, updatedData) => {
 };
 
 export const deleteNote = async (id) => {
-  const response = await fetch(`http://localhost:3000/api/notes/${id}`, {
+  const response = await fetch(`/api/notes/${id}`, {
     method: 'DELETE',
   });
   const data = await response.json();

@@ -11,7 +11,7 @@ export const fetchUsers = async () => {
 };
 
 export const fetchUserById = async (id) => {
-  const response = await fetch(`/api/users/${id}`, { cache: 'no-store' });
+  const response = await fetch(`https://tech-notes-dashboard.netlify.app/api/users/${id}`, { cache: 'no-store' });
   const data = await response.json();
 
   if (!response.ok) {
@@ -37,7 +37,7 @@ export const createUser = async (userData) => {
 };
 
 export const updateUser = async (id, userData) => {
-  const response = await fetch(`http://localhost:3000/api/users/${id}`, {
+  const response = await fetch(`/api/users/${id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -53,7 +53,7 @@ export const updateUser = async (id, userData) => {
 };
 
 export const deleteUser = async (id) => {
-  const response = await fetch(`http://localhost:3000/api/users/${id}`, {
+  const response = await fetch(`/api/users/${id}`, {
     method: 'DELETE',
   });
 
