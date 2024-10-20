@@ -33,16 +33,15 @@ const handler = NextAuth({
     }),
   ],
   session: {
-    strategy: 'jwt', // Use JWT for sessions
-    maxAge: 7 * 24 * 60 * 60, // Session expiration time (7 days)
+    strategy: 'jwt', 
+    maxAge: 7 * 24 * 60 * 60, // (7 days)
   },
   jwt: {
-    secret: process.env.NEXTAUTH_SECRET, // JWT secret for signing tokens
-    maxAge: 7 * 24 * 60 * 60, // JWT expiration time (7 days)
+    secret: process.env.NEXTAUTH_SECRET,
+    maxAge: 7 * 24 * 60 * 60, // (7 days)
   },
   callbacks: {
     async jwt({ token, user }) {
-      // First time the token is created
       if (user) {
         token.username = user.username;
         token.role = user.role;
@@ -50,7 +49,7 @@ const handler = NextAuth({
       return token;
     },
     async session({ session, token }) {
-      session.user.id = token.id;
+      session.user.username = token.username;
       session.user.role = token.role;
       session.permission = session.user.role === 'Admin' || session.user.role === 'Manager';
       return session;

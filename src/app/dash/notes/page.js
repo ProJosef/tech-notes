@@ -1,16 +1,17 @@
 import { fetchNotes } from '@/services/notesService';
 import Note from '@/components/Note';
-import { getToken } from 'next-auth/jwt';
-import { cookies } from 'next/headers';
+import { getSessionData } from '@/lib/session';
 
 export default async function NotesList() {
   try {
-    const token = await getToken({ req: { cookies: cookies() } });
+    const session = await getSessionData();
 
     const notes = await fetchNotes();
 
-    let filteredNotes = notes;
-    if (token.role === 'Employee') {
+    let filteredNotes = null;
+    if (session.permission) {
+      filteredNotes = notes;
+    } else {
       filteredNotes = notes.filter((note) => note.username === token.username);
     }
 

@@ -1,11 +1,8 @@
-import { getToken } from 'next-auth/jwt';
-import { cookies } from 'next/headers';
+import { getSessionData } from '@/lib/session';
 import Link from 'next/link';
 
 export default async function Welcome() {
-  const token = await getToken({ req: { cookies: cookies() } });
-
-  const show = token.role === 'Admin' || token.role === 'Manager'
+  const session = await getSessionData();
 
   const date = new Date();
   const today = new Intl.DateTimeFormat('en-US', { dateStyle: 'full', timeStyle: 'long' }).format(
@@ -26,13 +23,13 @@ export default async function Welcome() {
         <Link href="/dash/notes/new">Add New techNote</Link>
       </p>
 
-      {show && (
+      {session.permission && (
         <p>
           <Link href="/dash/users">View User Settings</Link>
         </p>
       )}
 
-      {show && (
+      {session.permission && (
         <p>
           <Link href="/dash/users/new">Add New User</Link>
         </p>

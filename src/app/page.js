@@ -1,6 +1,9 @@
-import Link from "next/link";
+import Link from 'next/link';
+import { getSessionData } from '@/lib/session';
 
-export default function Home() {
+export default async function Home() {
+  const session = await getSessionData();
+
   return (
     <section className="public">
       <header>
@@ -25,9 +28,15 @@ export default function Home() {
         <br />
         <p>Owner: Dan Davidson</p>
       </main>
-      <footer>
-        <Link href="/login">Employee Login</Link>
-      </footer>
+      {session ? (
+        <footer>
+          <Link href="/dash">Go to Dashboard</Link>
+        </footer>
+      ) : (
+        <footer>
+          <Link href="/login">Employee Login</Link>
+        </footer>
+      )}
     </section>
   );
 }

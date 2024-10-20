@@ -1,6 +1,7 @@
 import localFont from 'next/font/local';
 import './globals.css';
 import { getServerSession } from 'next-auth';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import SessionProvider from '@/context/SessionProvider';
 
 const geistSans = localFont({
@@ -20,7 +21,7 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
