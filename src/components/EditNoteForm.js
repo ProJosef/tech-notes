@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { updateNote, deleteNote } from '@/services/notesService';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,7 +9,6 @@ import { faSave, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
 export default function EditNoteForm({ users, note }) {
   const router = useRouter();
-  const { id } = useParams();
   const [userId, setUserId] = useState(note.user);
   const [title, setTitle] = useState(note.title);
   const [text, setText] = useState(note.text);
@@ -44,10 +43,10 @@ export default function EditNoteForm({ users, note }) {
   const canSave = [title, text, userId].every(Boolean);
 
   const onSaveNoteClicked = async () => {
+    const NoteData = { user: userId, title, text, completed };
     try {
-      const NoteData = { user: userId, title, text, completed };
       if (canSave) {
-        await updateNote(id, NoteData);
+        await updateNote(note._id, NoteData);
         router.push('/dash/notes');
       }
     } catch (error) {
@@ -57,7 +56,7 @@ export default function EditNoteForm({ users, note }) {
 
   const onDeleteNoteClicked = async () => {
     try {
-      await deleteNote(id);
+      await deleteNote(note._id);
       router.push('/dash/notes');
     } catch (error) {
       setError(error.message);

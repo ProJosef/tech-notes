@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { ROLES } from '@/config/roles';
 import { updateUser, deleteUser } from '@/services/usersService';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -12,7 +12,6 @@ const PWD_REGEX = /^[A-z0-9!@#$%]{4,12}$/;
 
 export default function EditUserForm({ user }) {
   const router = useRouter();
-  const { id } = useParams();
   const [username, setUsername] = useState(user.username);
   const [validUsername, setValidUsername] = useState(true);
   const [password, setPassword] = useState('');
@@ -53,7 +52,7 @@ export default function EditUserForm({ user }) {
     }
     try {
       if (canSave) {
-        await updateUser(id, updatedData);
+        await updateUser(user._id, updatedData);
         router.push('/dash/users');
       }
     } catch (error) {
@@ -63,7 +62,7 @@ export default function EditUserForm({ user }) {
 
   const onDeleteUserClicked = async () => {
     try {
-      await deleteUser(id);
+      await deleteUser(user._id);
       router.push('/dash/users');
     } catch (error) {
       setError(error.message);
@@ -126,7 +125,7 @@ export default function EditUserForm({ user }) {
             type="checkbox"
             checked={active}
             onChange={(e) => setActive(e.target.checked)}
-            />
+          />
         </label>
 
         <label className="form__label" htmlFor="role">
