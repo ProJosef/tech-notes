@@ -29,8 +29,7 @@ export default async function Home() {
         <p>Owner: Dan Davidson</p>
       </main>
       {session ? (
-        <footer>
-          <Link href="/dash">Go to Dashboard</Link>
+        <footer>          <Link href="/dash">Go to Dashboard</Link>
         </footer>
       ) : (
         <footer>

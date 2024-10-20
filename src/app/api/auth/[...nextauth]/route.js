@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 import connectDB from '@/lib/db';
 import Users from '@/models/Users';
 
-const handler = NextAuth({
+const authOptions = {
   pages: {
     signIn: '/login',
   },
@@ -33,7 +33,7 @@ const handler = NextAuth({
     }),
   ],
   session: {
-    strategy: 'jwt', 
+    strategy: 'jwt',
     maxAge: 7 * 24 * 60 * 60, // (7 days)
   },
   jwt: {
@@ -56,6 +56,8 @@ const handler = NextAuth({
     },
   },
   secret: process.env.NEXTAUTH_SECRET,
-});
+};
 
-export { handler as GET, handler as POST };
+const handler = NextAuth(authOptions);
+
+export { handler as GET, handler as POST, authOptions };
