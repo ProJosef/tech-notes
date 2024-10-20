@@ -1,5 +1,5 @@
 export const fetchNotes = async () => {
-  const response = await fetch('https://tech-notes-dashboard.netlify.app/api/users', {
+  const response = await fetch('https://tech-notes-dashboard.netlify.app/api/notes', {
     cache: 'no-store',
   });
   const data = await response.json();
