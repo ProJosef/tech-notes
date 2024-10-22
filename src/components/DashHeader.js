@@ -24,7 +24,7 @@ export default function DashHeader() {
   const logoutButton = (
     <button
       onClick={async () => {
-        signOut({ callbackUrl: '/login', redirect: false });
+        signOut({ callbackUrl: '/', redirect: true });
       }}
       className="icon-button"
       title="Logout"
