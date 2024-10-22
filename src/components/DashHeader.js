@@ -24,7 +24,7 @@ export default function DashHeader() {
   const logoutButton = (
     <button
       onClick={async () => {
-        await signOut({ callbackUrl: 'https://tech-notes-dashboard.netlify.app/', redirect: true });
+        signOut({ callbackUrl: '/login', redirect: false });
       }}
       className="icon-button"
       title="Logout"
